@@ -1,0 +1,113 @@
+{% extends "base2.html" %}
+
+{% block content %}
+
+  <main class="mt-5 pt-4">
+    <div class="container dark-grey-text mt-5">
+
+      <!--Grid row-->
+      <div class="row wow fadeIn">
+
+        <!--Grid column-->
+        <div class="col-md-6 mb-4">
+       <h3 class="my-4 h4">PRODUCTO: {{ object.nombre }}</h3>
+         <figure class="image is-square">
+            <a href="{{ image.image.url}}">
+                <img src="{{image.image.url|default:'https://equiposlibres.pe/wp-content/uploads/2019/02/samsung-galaxy-s10-plus-128-gb-8gb-sellado-garantia-12-meses-D_NQ_NP_629724-MPE29533016716_032019-F.jpg' }}" alt="No hay imagen disponible">
+            </a>
+        </figure>
+        </div>
+        <!--Grid column-->
+
+        <!--Grid column-->
+        <div class="col-md-6 mb-4">
+
+          <!--Content-->
+          <div class="p-4">
+
+            <div class="mb-3">
+              <a href="">
+                <span class="badge blue mr-1">{{ object.categoria.nombre }}</span>
+              </a>
+            </div>
+
+            <p class="lead font-weight-bold">Descripción</p>
+
+            <p>{{ object.descripcion }}</p>
+             <h4 class="my-4 h4">PRECIO: S/.{{ object.precio }}</h4>
+
+            {% comment %} <form class="d-flex justify-content-left">
+              <!-- Default input -->
+              <input type="number" value="1" aria-label="Search" class="form-control" style="width: 100px">
+              <button class="btn btn-primary btn-md my-0 p" type="submit">
+                Añadir al Carrito
+                <i class="fas fa-shopping-cart ml-1"></i>
+              </button>
+
+            </form> {% endcomment %}
+            <a href="{% url 'add-to-cart' product_pk=object.pk %}" class="btn btn-primary btn-md my-0 p">
+              Añadir al Carrito
+              <i class="fas fa-shopping-cart ml-1"></i>
+            </a>
+
+          </div>
+          <!--Content-->
+
+        </div>
+        <!--Grid column-->
+
+      </div>
+      <!--Grid row-->
+
+      <hr>
+
+      <!--Grid row-->
+      <div class="row d-flex justify-content-center wow fadeIn">
+
+        <!--Grid column-->
+        <div class="col-md-6 text-center">
+
+          <h4 class="my-4 h4">¡LINIO TE DA LA BIENVENIDA!</h4>
+
+          <p>Continua explorando la página para encontrar el producto de tus sueños!.</p>
+
+        </div>
+        <!--Grid column-->
+
+      </div>
+      <!--Grid row-->
+
+      <!--Grid row-->
+      <div class="row wow fadeIn">
+
+        <!--Grid column-->
+        <div class="col-lg-4 col-md-12 mb-4">
+
+          <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/11.jpg" class="img-fluid" alt="">
+
+        </div>
+        <!--Grid column-->
+
+        <!--Grid column-->
+        <div class="col-lg-4 col-md-6 mb-4">
+
+          <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/12.jpg" class="img-fluid" alt="">
+
+        </div>
+        <!--Grid column-->
+
+        <!--Grid column-->
+        <div class="col-lg-4 col-md-6 mb-4">
+
+          <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/13.jpg" class="img-fluid" alt="">
+
+        </div>
+        <!--Grid column-->
+
+      </div>
+      <!--Grid row-->
+
+    </div>
+  </main>
+
+{% endblock content %}

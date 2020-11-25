@@ -1,0 +1,22 @@
+{% extends "base2.html" %}
+{% block content %}
+    <div align="center">
+  <img src="https://tmcreativos.com/archivo/linio-tarapoto.jpg">
+  </div>
+<div class="container">
+    <section class="mb-4">
+        <div class="row wow fadeIn">
+            <div class='col-6 offset-3'>
+                <strong>
+            <form class='dark-text' method="post" >
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input class="btn btn-primary" type="submit" value="Registrate">
+            </form>
+                </strong>
+            </div>
+        </div>
+      </section>
+ </div>
+
+{% endblock %}

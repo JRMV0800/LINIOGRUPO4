@@ -1,0 +1,139 @@
+{% extends "base2.html" %}
+
+{% block content %}
+  <main>
+    <div align="center">
+  <img src="https://peru21.pe/resizer/B3Z9wnBFlanh1P0KEsWnS5pa5ZQ=/580x330/smart/filters:format(jpeg):quality(75)/arc-anglerfish-arc2-prod-elcomercio.s3.amazonaws.com/public/NBDS4NG4CVE5DM46L2SVZDGC54.png">
+  </div>
+
+    <div class="container">
+
+      <!--Navbar-->
+      <nav class="navbar navbar-expand-lg dark navbar-mdb-color lighten-3 mt-3 mb-5">
+
+        <!-- Navbar brand -->
+        <span class="navbar-brand">Categorías:</span>
+
+        <!-- Collapse button -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+          aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Collapsible content -->
+        <div class="collapse navbar-collapse" id="basicExampleNav">
+
+          <!-- Links -->
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-producto active">
+              <a class="nav-link" href="#">All
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+            <li class="nav-producto">
+              <a class="nav-link" href="/productos/42">Celulares</a>
+            </li>
+            <li class="nav-producto">
+              <a class="nav-link" href="#">Deportes</a>
+            </li>
+            <li class="nav-producto">
+              <a class="nav-link" href="#">Hogar</a>
+            </li>
+
+          </ul>
+          <!-- Links -->
+           <div class="content">
+                  <form action="{% url 'product-list' %}" method="get">
+                      <input class="input is-rounded" type="text" name="q" placeholder="Busca tu producto...">
+                  </form>
+                </div>
+            </div>
+        <!-- Collapsible content -->
+      </nav>
+      <!--/.Navbar-->
+
+      <!--Section: Products v.3-->
+      <section class="text-center mb-4">
+
+        <div class="row wow fadeIn">
+          {% for producto in objects_list %}
+          <div class="col-lg-3 col-md-6 mb-4">
+
+            <div class="card">
+              <div class="view overlay">
+                <a href="{{ image.url }}">
+                <img src= "{{image.url|default:'https://equiposlibres.pe/wp-content/uploads/2019/02/samsung-galaxy-s10-plus-128-gb-8gb-sellado-garantia-12-meses-D_NQ_NP_629724-MPE29533016716_032019-F.jpg'}}" alt="Imagen no disponible" class="card-img-top">
+                </a>
+                  <a href="{% url 'product-detail' producto.pk %}">
+                  <div class="mask rgba-white-slight"></div>
+                </a>
+              </div>
+
+              <div class="card-body text-center">
+                <a href="" class="grey-text">
+                  <h5><a href="{% url 'product-detail' producto.pk %}">
+                                {{ producto.categoria }}
+                            </a></h5>
+                </a>
+                <h5>
+                  <strong>
+                    <a href="{% url 'product-detail' producto.pk %}" class="dark-grey-text">{{ producto.nombre }}
+                    </a>
+                  </strong>
+                </h5>
+                <h5>
+                  <strong>
+                    <a href="{% url 'product-detail' producto.pk %}" class="dark-grey-text">S/. {{ producto.precio }}
+                    </a>
+                  </strong>
+                </h5>
+              </div>
+
+            </div>
+
+          </div>
+          {% endfor %}
+        </div>
+
+      </section>
+      <!--Section: Products v.3-->
+
+      <!--Pagination-->
+
+      {% if is_paginated %}
+      <nav class="d-flex justify-content-center wow fadeIn">
+        <ul class="pagination pg-blue">
+
+          {% if page_obj.has_previous %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+              <span class="sr-only">Previous</span>
+            </a>
+          </li>
+          {% endif %}
+
+          <li class="page-item active">
+            <a class="page-link" href="?page={{ page_obj.number }}">{{ page_obj.number }}
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+
+          {% if page_obj.has_next %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+              <span class="sr-only">Next</span>
+            </a>
+          </li>
+          {% endif %}
+        </ul>
+      </nav>
+      {% endif %}
+
+    </div>
+  </main>
+
+{% endblock content %}
+
+

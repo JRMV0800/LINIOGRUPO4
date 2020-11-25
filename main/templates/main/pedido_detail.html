@@ -1,0 +1,57 @@
+{% extends "base2.html" %}
+
+{% block content %}
+ <div align="center">
+  <img src="https://d1nhio0ox7pgb.cloudfront.net/_img/g_collection_png/standard/256x256/shopping_cart.png">
+
+  </div>
+
+<div class="container">
+    <section class="mb-4">
+        <div class="row wow fadeIn">
+            <div class='col-6 offset-3'>
+    <h3 class="title"> Carrito </h3>
+    <div class="block">
+        <h5 class="subtitle"> Información General </h5>
+        <div class="content">
+            <ul>
+              <li> <strong>Cliente:</strong> {{ object.cliente.user_profile.user.get_username }}</li>
+              <li> <strong>Fecha Creación:</strong> {{ object.fecha_creacion }}</li>
+              <li> <strong>Estado:</strong> {{ object.estado }}</li>
+            </ul>
+        </div>
+    </div>
+    <div class="block">
+        <h5 class="subtitle"> Detalle </h5>
+        <div class="content">
+            <ul>
+              {% for detalle in detalles %}
+                <li>
+                  <strong>{{ detalle }} </strong>
+                  <a href="{% url 'add-to-cart' product_pk=detalle.producto.pk %}" class="button is-success">
+                    +
+                  </a>
+                  <a href="{% url 'remove-from-cart' product_pk=detalle.producto.pk %}" class="button is-danger">
+                    -
+                  </a>
+                </li>
+              {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <a href="{% url 'pedido-update' pk=object.pk %}" class='button is-info'>
+      Confirmar Carrito
+    </a>
+    <hr>
+    <div class="content">
+        <ul>
+          <li><a href="{% url 'product-list' %}">Ver Lista de Productos</a></li>
+          <li><a href="{% url 'home' %}">Inicio</a></li>
+        </ul>
+    </div>
+           </div>
+        </div>
+      </section>
+ </div>
+
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends "base2.html" %}
+
+{% block content %}
+
+            <div class='col-6 offset-3'>
+
+
+<script src="https://www.paypal.com/sdk/js?client-id=Ad3oOl6ydX4lXdPpea8Ht02yXE0tJdVWVPFg4zS_FcF6vtPdpoEPlbUzbPwkds974rtF_z6nVmqs2kq7"> // Replace YOUR_SB_CLIENT_ID with your sandbox client ID
+    </script>
+
+    <h3 class="title">Precio total del pedido: S/. {{ pedido.get_total }}</h3>
+
+                <h2 class="title">Elegir Método de Pago</h2>
+    <div class="block" id="paypal-button-container"></div>
+
+ </div>
+
+    <!-- Add the checkout buttons, set up the order and approve the order -->
+    <script>
+      var total = {{ pedido.get_total }}
+
+      paypal.Buttons({
+        createOrder: function(data, actions) {
+          return actions.order.create({
+            purchase_units: [{
+              amount: {
+                value: `${total}`
+              }
+            }]
+          });
+        },
+        onApprove: function(data, actions) {
+          return actions.order.capture().then(function(details) {
+            window.location.href = 'http://linioexpgrupo4.herokuapp.com/complete_payment/';
+          });
+        }
+      }).render('#paypal-button-container'); // Display payment options on your web page
+    </script>
+<section class="mb-4">
+<div class="row wow fadeIn">
+<div class='col-6 offset-3'>
+    _
+            <h3 class="title">Elegir Comprobante de Pago</h3>
+    Si se desea factura rellenar los siguientes datos:
+Razon Social, RUC, Domicilio Fiscal
+
+</div>
+    </div>
+    </section>
+{% endblock %}
